@@ -1,6 +1,7 @@
 package com.bikeshare.lab1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,7 +34,7 @@ class BeginnerFirstTest {
     void myVeryFirstTest() {
         // TODO: Write a simple test that always passes
         // HINT: Use assertEquals(1, 1) to check if 1 equals 1
-        
+        assertEquals(1, 1);
         // Congratulations! You just saw your first passing test! 🎉
     }
 
@@ -63,14 +64,14 @@ class BeginnerFirstTest {
     @Test
     @DisplayName("Test bike types - simple version")
     void testBikeTypesSimple() {
-        // TODO: Test BikeType.STANDARD
-        // ARRANGE: Get a bike type using BikeType.STANDARD
-        
+// ARRANGE: Get a bike type using BikeType.STANDARD
+        BikeType standardType = BikeType.STANDARD;
+
         // ACT: Get its display name using getDisplayName()
-        
+        String typeName = standardType.getDisplayName();
+
         // ASSERT: Check if it equals "Standard Bike"
-        
-        // Try this: Change "Standard Bike" to something else and see the test fail!
+        assertEquals("Standard Bike", typeName);
     }
 
     /**
@@ -79,7 +80,9 @@ class BeginnerFirstTest {
     @Test
     @DisplayName("Learn different assertions")
     void learnDifferentAssertions() {
-        BikeType electricBike = BikeType.ELECTRIC;
+        // Arrange
+        BikeType electricBike1 = BikeType.ELECTRIC;
+        BikeType electricBike2 = BikeType.ELECTRIC;
         
         // TODO: Try different assertion methods:
         // - assertEquals: Check if two things are equal
@@ -87,8 +90,13 @@ class BeginnerFirstTest {
         // - assertNotNull: Check if something is not null
         // - assertSame: Check if two objects are the same
         
-        // HINT: electricBike.getDisplayName() should be "Electric Bike"
-        // HINT: electricBike.getPricePerMinute() should be > 0
+        // Assert
+        assertEquals("Electric Bike", electricBike1.getDisplayName());
+        assertFalse(electricBike1.getMaxSpeedKmh() < 1);
+        assertTrue(electricBike1.isElectric());
+        assertTrue(electricBike1.getPricePerMinute() > 0);
+        assertNotNull(electricBike1.getDisplayName());
+        assertSame(electricBike2, electricBike1);
     }
 
     /**
@@ -98,12 +106,13 @@ class BeginnerFirstTest {
     @Test
     @DisplayName("Example of a failing test (for learning)")
     void exampleFailingTest() {
-        // TODO: Write a test that passes first
+        
         // Then uncomment a line that will fail to see what happens
         
-        // For now, let's make it pass:
-        // assertEquals("This will pass", "This will pass");
+        String hi = "This will pass";
         
+        assertEquals("This will pass", hi);
+
         // Exercise: Try making a test that fails on purpose
         // and read the error message to understand what went wrong
     }
@@ -114,15 +123,28 @@ class BeginnerFirstTest {
     @Test
     @DisplayName("Practice with different bike types")
     void practiceWithDifferentBikeTypes() {
-        // TODO: Test different bike types:
+        // Arrange
+        BikeType mountainBike = BikeType.MOUNTAIN;
+        BikeType electricBike = BikeType.ELECTRIC;
+        BikeType cargoBike = BikeType.CARGO;
+        BikeType standardBike = BikeType.STANDARD;
         
+        // Assert
         // Test standard bike
-        // HINT: BikeType.STANDARD should have display name "Standard Bike" and price 0.50
-        
+        assertEquals("Standard Bike", standardBike.getDisplayName());
+        assertEquals(0.50, standardBike.getPricePerMinute());
+
         // Test electric bike  
-        // HINT: BikeType.ELECTRIC should have display name "Electric Bike" and price 1.00
+        assertEquals("Electric Bike", electricBike.getDisplayName());
+        assertEquals(1.00, electricBike.getPricePerMinute());
         
-        // TODO: Can you figure out the mountain and cargo bike values?
+        // Test mountain bike
+        assertEquals("Mountain Bike", mountainBike.getDisplayName());
+        assertEquals(0.70, mountainBike.getPricePerMinute());
+        
+        // Test cargo bike
+        assertEquals("Cargo Bike", cargoBike.getDisplayName());
+        assertEquals(1.20, cargoBike.getPricePerMinute());
         
     }
 
@@ -132,16 +154,17 @@ class BeginnerFirstTest {
     @Test
     @DisplayName("Understanding expected vs actual")
     void understandExpectedVsActual() {
-        BikeType mountainBike = BikeType.MOUNTAIN;
         
         // In assertEquals(expected, actual):
         // - First parameter: what you EXPECT the result to be
         // - Second parameter: what the code ACTUALLY returns
         
-        // TODO: Create expected and actual variables
-        // TODO: Use assertEquals to compare them
-        
         // When this fails, JUnit shows: "Expected: X, Actual: Y"
+        
+        // Arrange
+        BikeType mountainBike = BikeType.MOUNTAIN;
+        
+        assertEquals("Mountain Bike", mountainBike.getDisplayName());
     }
 
     /**
@@ -151,11 +174,16 @@ class BeginnerFirstTest {
     @DisplayName("🎯 CHALLENGE: Complete this test yourself!")
     void yourFirstChallenge() {
         // Challenge: Test the CARGO bike type
+
+        // Arrange
         // 1. Get a CARGO bike type
-        // 2. Check that its display name is "Cargo Bike"
-        // 3. Check that its rate is 1.20 (Swedish pricing)
+        BikeType cargoBike = BikeType.CARGO;
         
-        // TODO: Complete this challenge!
+        // Assert
+        // 2. Check that its display name is "Cargo Bike"
+        assertEquals("Cargo Bike", cargoBike.getDisplayName());
+        // 3. Check that its rate is 1.20 (Swedish pricing)
+        assertEquals(1.20, cargoBike.getPricePerMinute());
         
         // 🎉 Congratulations! You completed your first challenge!
         // Try changing the values above to see what happens when tests fail
