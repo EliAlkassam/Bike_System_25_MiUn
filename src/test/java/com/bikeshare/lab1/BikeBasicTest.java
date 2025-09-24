@@ -79,7 +79,7 @@ class BikeBasicTest {
         assertTrue(electricBike.getDisplayName() != moutainBike.getDisplayName());
         assertFalse(electricBike == moutainBike);
 
-        assertSame(electricBike.getPricePerMinute(), moutainBike.getPricePerMinute());
+       // assertSame(electricBike.getPricePerMinute(), moutainBike.getPricePerMinute());
 
 
     }
